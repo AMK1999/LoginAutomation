@@ -1,9 +1,8 @@
 import org.openqa.selenium.*;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.junit.*;
 
-//import dev.failsafe.internal.util.Assert;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,16 +37,14 @@ public class LoginAutomation {
         web.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(Email);
         web.findElement(By.xpath("//input[@placeholder='Phone Number']")).sendKeys(number);
         web.findElement(By.className("reset-pwd-btn")).click();
-        // Assert.assertEquals(web.findElement(By.className("infoMsg")).getText(),"Please
-        // use temporary password 'rahulshettyacademy' to Login.");
+        Assert.assertEquals(web.findElement(By.className("infoMsg")).getText(),"Please use temporary password 'rahulshettyacademy' to Login.");
         System.out.println(web.findElement(By.className("infoMsg")).getText());
         String passWord = getPassword();
         web.findElement(By.className("go-to-login-btn")).click();
         web.findElement(By.id("inputUsername")).sendKeys("JohnPaul");
         web.findElement(By.name("inputPassword")).sendKeys("rahulshettyacademy");
         System.out.println(web.findElement(By.className("error")).getText());
-        // Assert.assertEquals(web.findElement(By.className("error")).getText(),"*
-        // Incorrect username or password");
+        Assert.assertEquals(web.findElement(By.className("error")).getText(),"* Incorrect username or password");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -64,9 +61,9 @@ public class LoginAutomation {
             e.printStackTrace();
         }
         System.out.println(web.findElement(By.cssSelector("div[class='login-container'] h2")).getText());
-        // Assert.assertEquals(web.findElement(By.cssSelector("div[class='login-container']
-        // h2")).getText(),"Hello rahul,");
+        Assert.assertEquals(web.findElement(By.cssSelector("div[class='login-container'] h2")).getText(),"Hello rahul,");
         // web.close();
+        
         AutomationPractice();
     }
 
@@ -134,8 +131,13 @@ public class LoginAutomation {
             }
         }
         // web.findElement(By.linkText("India")).click();
+        //input[@id = 'ctl00_mainContent_chk_SeniorCitizenDiscount']
+        Assert.assertFalse(web.findElement(By.xpath("//input[@id = 'ctl00_mainContent_chk_SeniorCitizenDiscount']")).isSelected());
+        System.out.println(">>");
+        //web.findElement(By.xpath("//input[@id = 'ctl00_mainContent_chk_SeniorCitizenDiscount']")).click();
 
         System.out.println(web.findElement(By.xpath("//input[@ placeholder='Type to Select']")).getText());
+        web.close();
 
     }
 }
